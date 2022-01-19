@@ -19,4 +19,7 @@ def create_app(test_config=None):
     from .models import db
     db.init_app(app)
 
+    from .api import api
+    api.init_app(app)
+
     return app
