@@ -6,6 +6,6 @@ api = Api(prefix="/finance")
 api.add_resource(
     IncomeResource,
     '/incomes',
-    '/incomes/<int:id>',
+    '/incomes/<int:income_id>',
     endpoint="incomes"
 )

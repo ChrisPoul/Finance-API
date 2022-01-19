@@ -16,3 +16,6 @@ class Model:
 
     def delete(self):
         db.session.remove(self)
+
+    def validate(self):
+        self.validation.validate()

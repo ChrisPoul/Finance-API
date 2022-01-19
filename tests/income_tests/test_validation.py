@@ -1,4 +1,17 @@
 from . import IncomeTest
+from Finance.models.income import Income
+
+
+class TestValidate(IncomeTest):
+
+    def test_should_not_return_error_given_valid_income(self):
+        income = Income(
+            concept="Valid Concept",
+            quantity="10.5"
+        )
+        error = income.validation.validate()
+
+        self.assertEqual(error, None)
 
 
 class TestValidateConcept(IncomeTest):

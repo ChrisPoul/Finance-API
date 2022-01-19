@@ -4,6 +4,13 @@ class IncomeValidation:
         self.income = income
         self.error = None
 
+    def validate(self):
+        self.validate_concept()
+        if not self.error:
+            self.validate_quantity()
+        
+        return self.error
+
     def validate_concept(self):
         concept = self.income.concept.replace(" ", "")
         if concept.isalpha() is False:
