@@ -12,7 +12,9 @@ class IncomeValidation:
         return self.error
 
     def validate_money(self):
-        if self.income.money.isnumeric() is False:
+        try:
+            float(self.income.money)
+        except ValueError:
             self.error = "El dinero tiene que ser un número valido"
 
         return self.error
