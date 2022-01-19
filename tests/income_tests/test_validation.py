@@ -15,7 +15,7 @@ class TestValidateConcept(IncomeTest):
         
         self.assertNotEqual(error, None)
 
-    def test_should_return_error_given_empty_string_as_money(self):
+    def test_should_return_error_given_empty_string_as_quantity(self):
         self.income.concept = ""
         error = self.income.validation.validate_concept()
 
@@ -24,26 +24,26 @@ class TestValidateConcept(IncomeTest):
 
 class TestValidateMoney(IncomeTest):
 
-    def test_should_not_return_error_given_integer_money(self):
-        self.income.money = "111"
-        error = self.income.validation.validate_money()
+    def test_should_not_return_error_given_integer_quantity(self):
+        self.income.quantity = "111"
+        error = self.income.validation.validate_quantity()
 
         self.assertEqual(error, None)
 
-    def test_should_not_return_error_given_float_money(self):
-        self.income.money = "20.5"
-        error = self.income.validation.validate_money()
+    def test_should_not_return_error_given_float_quantity(self):
+        self.income.quantity = "20.5"
+        error = self.income.validation.validate_quantity()
 
         self.assertEqual(error, None)
 
-    def test_should_return_error_given_non_numerical_characters_in_money(self):
-        self.income.money = "ll"
-        error = self.income.validation.validate_money()
+    def test_should_return_error_given_non_numerical_characters_in_quantity(self):
+        self.income.quantity = "ll"
+        error = self.income.validation.validate_quantity()
 
         self.assertNotEqual(error, None)
 
-    def test_should_return_error_given_empty_string_as_money(self):
-        self.income.money = ""
-        error = self.income.validation.validate_money()
+    def test_should_return_error_given_empty_string_as_quantity(self):
+        self.income.quantity = ""
+        error = self.income.validation.validate_quantity()
 
         self.assertNotEqual(error, None)
