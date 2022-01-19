@@ -17,7 +17,8 @@ class Model:
         db.session.commit()
 
     def delete(self):
-        db.session.remove(self)
+        db.session.delete(self)
+        self.save()
 
     def validate(self):
         error = self.validation.validate()
