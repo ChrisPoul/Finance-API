@@ -9,9 +9,11 @@ class Model:
         db.session.add(self)
         self.save()
 
-    def save(self, **kwargs):
+    def modify(self, **kwargs):
         for attr, value in kwargs.items():
             setattr(self, attr, value)
+
+    def save(self):
         db.session.commit()
 
     def delete(self):
