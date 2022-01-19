@@ -39,3 +39,8 @@ class IncomeResource(Resource):
             income.save()
         
         return error
+
+    def delete(self, income_id: int):
+        income = Income.query.get(income_id)
+        if income:
+            income.delete()

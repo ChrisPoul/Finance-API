@@ -78,3 +78,20 @@ class TestModifyIncome(IncomeTest):
         self.db.session.rollback()
 
         self.assertEqual(self.income.quantity, prev_quantity)
+
+
+class TestDeleteIncome(IncomeTest):
+
+    def test_should_delete_income_given_delete_request_and_valid_income_id(self):
+        self.client.delete(
+            url_for("incomes", income_id=self.income.id)
+        )
+
+        self.assertNotIn(self.income, self.db.session)
+
+    def test_should_return_not_delete_income_given_delete_request_and_invalid_id(self):
+        response = self.client.delete(
+            url_for("incomes", income_id=0)
+        )
+
+        self.assertIn(self.income, self.db.session)
