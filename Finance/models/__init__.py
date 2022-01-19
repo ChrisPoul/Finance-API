@@ -10,7 +10,7 @@ class Model:
         self.save()
 
     def save(self, **kwargs):
-        for key, value in kwargs.items():
+        for attr, value in kwargs.items():
             setattr(self, attr, value)
         db.session.commit()
 
