@@ -18,4 +18,6 @@ class Model:
         db.session.remove(self)
 
     def validate(self):
-        self.validation.validate()
+        error = self.validation.validate()
+
+        return error

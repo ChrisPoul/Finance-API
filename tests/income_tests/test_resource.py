@@ -25,17 +25,31 @@ class TestGetIncome(IncomeTest):
         self.assertEqual(income["concept"], self.income.concept)
 
 
-# class TestAddIncome(IncomeTest):
+class TestAddIncome(IncomeTest):
 
-#     def test_should_add_income_given_post_request_and_valid_income_form_in_json_format(self):
-#         income_form = dict(
-#             concept="Valid Concept",
-#             quantity="Valid Quantity"
-#         )
-#         self.client.post(
-#             url_for("incomes"),
-#             json=income_form
-#         )
-#         income = Income.query.all()[-1]
+    def test_should_add_income_given_post_request_and_valid_income_form_in_json_format(self):
+        income_form = dict(
+            concept="Valid Concept",
+            quantity="10"
+        )
+        self.client.post(
+            url_for("incomes"),
+            json=income_form
+        )
 
-#         self.assertEqual(income.concept, income_form['concept'])
+        self.assertEqual(Income.query.count(), 2)
+
+    def test_should_not_add_income_given_post_request_and_invalid_income_form_in_json_format(self):
+        income_form = dict(
+            concept="1nv@lid (0ncept",
+            quantity=""
+        )
+        self.client.post(
+            url_for("incomes"),
+            json=income_form
+        )
+
+        self.assertEqual(Income.query.count(), 1)
+
+
+        
