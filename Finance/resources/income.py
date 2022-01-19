@@ -27,5 +27,15 @@ class IncomeResource(Resource):
         error = income.validate()
         if not error:
             income.add()
+
+        return error
+
+    def put(self, income_id: int):
+        form = request.get_json()
+        income = Income.query.get(income_id)
+        income.modify(**form)
+        error = income.validate()
+        if not error:
+            income.save()
         
         return error

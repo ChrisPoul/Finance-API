@@ -52,4 +52,29 @@ class TestAddIncome(IncomeTest):
         self.assertEqual(Income.query.count(), 1)
 
 
-        
+class TestModifyIncome(IncomeTest):
+
+    def test_should_modify_income_given_valid_changes_and_valid_income_form_in_json_format(self):
+        income_form = dict(
+            concept="New Valid Concept"
+        )
+        self.client.put(
+            url_for("incomes", income_id=self.income.id),
+            json=income_form
+        )
+        self.db.session.rollback()
+
+        self.assertEqual(self.income.concept, income_form["concept"])
+
+    def test_should_not_modify_income_given_invalid_changes_in_json_format(self):
+        income_form = dict(
+            quantity="invalid quantity"
+        )
+        prev_quantity = self.income.quantity
+        self.client.put(
+            url_for("incomes", income_id=self.income.id),
+            json=income_form
+        )
+        self.db.session.rollback()
+
+        self.assertEqual(self.income.quantity, prev_quantity)
